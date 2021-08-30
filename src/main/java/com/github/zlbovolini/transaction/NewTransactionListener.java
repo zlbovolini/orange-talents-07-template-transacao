@@ -35,7 +35,8 @@ class NewTransactionListener {
         logger.info("Received new transaction uuid={}", transactionPayload.getUuid());
 
         transactionTemplate.execute(status -> {
-            Transaction transaction = transactionPayload.toModel(storeRepository::findOne, cardRepository::findOne);
+            Transaction transaction = transactionPayload.toModel(storeRepository::findOne, cardRepository::findByUuid);
+            // if exists card with same uuid it will be updated
             return transactionRepository.save(transaction);
         });
     }

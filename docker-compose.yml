@@ -25,6 +25,8 @@ services:
       TRANSACTIONS_SEARCH_DB_NAME: transactions_search
       TRANSACTIONS_SEARCH_DB_PORT: 5432
       KAFKA_HOST: PLAINTEXT://kafka:29092
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/transactions-search
+      KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/transactions-search/protocol/openid-connect/certs
     depends_on:
       - transactions_search_postgres
 

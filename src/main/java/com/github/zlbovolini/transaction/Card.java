@@ -1,9 +1,6 @@
 package com.github.zlbovolini.transaction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -15,6 +12,7 @@ class Card {
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     private UUID uuid;
 
     @NotNull
@@ -34,5 +32,9 @@ class Card {
 
     String getEmail() {
         return email;
+    }
+
+    void setEmail(String email) {
+        this.email = email;
     }
 }

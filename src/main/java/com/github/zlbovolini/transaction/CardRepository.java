@@ -7,5 +7,7 @@ import java.util.UUID;
 
 interface CardRepository extends JpaRepository<Card, Long> {
 
-    Optional<CardIdProjection> findByUuid(UUID uuid);
+    Optional<Card> findByUuid(UUID uuid);
+
+    Optional<CardIdProjection> findIdByUuid(UUID uuid);
 }

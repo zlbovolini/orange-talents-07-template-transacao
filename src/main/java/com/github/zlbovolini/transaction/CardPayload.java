@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 
 import static com.fasterxml.jackson.annotation.JsonCreator.Mode.PROPERTIES;
 
@@ -25,8 +27,13 @@ class CardPayload {
         this.email = email;
     }
 
-    Card toModel() {
-        return new Card(uuid, email);
+    Card toModel(Function<UUID, Optional<Card>> findCard) {
+        return findCard.apply(uuid)
+                .map(card -> {
+                    card.setEmail(email);
+                    return card;
+                })
+                .orElse(new Card(uuid, email));
     }
 
     UUID getUuid() {

@@ -7,10 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 
-// Poderia ser composta de entidades embedded, já que os dados nunca serão atualizados.
-// Ou utilizar um banco de dados NoSQL.
 @Entity
 class Transaction {
 
@@ -34,7 +33,7 @@ class Transaction {
 
     @Valid
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = { MERGE, PERSIST })
     private Card card;
 
     @Deprecated

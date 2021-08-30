@@ -3,7 +3,6 @@ package com.github.zlbovolini.transaction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -52,27 +51,10 @@ class TransactionPayload {
         return uuid;
     }
 
-    /**
-     * Never updates database data
-     * @param findStore
-     * @param findCard
-     * @return
-     */
     Transaction toModel(Function<Example<Store>, Optional<Store>> findStore,
-                        Function<Example<Card>, Optional<Card>> findCard) {
-
-        ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
-                .withIgnoreCase()
-                .withIncludeNullValues()
-                .withIgnorePaths("id");
-
-        Store transientStore = storePayload.toModel();
-        Store store = findStore.apply(Example.of(transientStore, exampleMatcher))
-                .orElse(transientStore);
-
-        Card transientCard = cardPayload.toModel();
-        Card card = findCard.apply(Example.of(transientCard, exampleMatcher))
-                .orElse(transientCard);
+                        Function<UUID, Optional<Card>> findCard) {
+        Store store = storePayload.toModel(findStore);
+        Card card = cardPayload.toModel(findCard);
 
         return new Transaction(uuid, amount, accomplishAt, store, card);
     }
