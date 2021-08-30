@@ -30,4 +30,16 @@ class Store {
         this.city = city;
         this.address = address;
     }
+
+    String getName() {
+        return name;
+    }
+
+    String getCity() {
+        return city;
+    }
+
+    String getAddress() {
+        return address;
+    }
 }

@@ -47,4 +47,24 @@ class Transaction {
         this.store = store;
         this.card = card;
     }
+
+    UUID getUuid() {
+        return uuid;
+    }
+
+    BigDecimal getAmount() {
+        return amount;
+    }
+
+    LocalDateTime getAccomplishAt() {
+        return accomplishAt;
+    }
+
+    Store getStore() {
+        return store;
+    }
+
+    Card getCard() {
+        return card;
+    }
 }

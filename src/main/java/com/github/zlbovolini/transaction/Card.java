@@ -27,4 +27,12 @@ class Card {
         this.uuid = uuid;
         this.email = email;
     }
+
+    UUID getUuid() {
+        return uuid;
+    }
+
+    String getEmail() {
+        return email;
+    }
 }
