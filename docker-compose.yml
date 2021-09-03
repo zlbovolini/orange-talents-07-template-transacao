@@ -29,6 +29,7 @@ services:
       KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/transactions-search/protocol/openid-connect/certs
     depends_on:
       - transactions_search_postgres
+    restart: on-failure
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:5.2.1"
